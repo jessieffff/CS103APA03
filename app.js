@@ -238,10 +238,15 @@ app.get('/upsertDB',
   async (req,res,next) => {
     //await Course.deleteMany({})
     for (course of courses){
-      const {subject,coursenum,section,term}=course;
+      const {subject,coursenum,section,term,times}=course;
       const num = getNum(coursenum);
       course.num=num
       course.suffix = coursenum.slice(num.length)
+      const timeString = "";
+      for (time of times) {
+        timeString = [...time.days] + time.start + "-" + time.end;
+      }
+      course.strTimes = timeString;
       await Course.findOneAndUpdate({subject,coursenum,section,term},course,{upsert:true})
     }
     const num = await Course.find({}).count();
@@ -380,6 +385,7 @@ app.set("port", port);
 
 // and now we startup the server listening on that port
 const http = require("http");
+const { time } = require("console");
 const server = http.createServer(app);
 
 server.listen(port);
