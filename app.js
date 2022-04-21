@@ -33,8 +33,8 @@ const courses = require('./public/data/courses20-21.json')
 // *********************************************************** //
 
 const mongoose = require( 'mongoose' );
-//const mongodb_URI = 'mongodb://localhost:27017/cs103a_todo'
-const mongodb_URI = 'mongodb+srv://cs_sj:BrandeisSpr22@cluster0.kgugl.mongodb.net/jiefangli?retryWrites=true&w=majority'
+const mongodb_URI = 'mongodb://localhost:27017/cs103a_todo'
+//const mongodb_URI = 'mongodb+srv://cs_sj:BrandeisSpr22@cluster0.kgugl.mongodb.net/jiefangli?retryWrites=true&w=majority'
 //mongodb+srv://cs103a:<password>@cluster0.kgugl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
 mongoose.connect( mongodb_URI, { useNewUrlParser: true, useUnifiedTopology: true } );
@@ -200,8 +200,8 @@ function times2str(times){
   } else {
     return times.map(x => time2str(x))
   }
-  
 }
+
 function min2HourMin(m){
   // converts minutes since midnight into a time string, e.g.
   // 605 ==> "10:05"  as 10:00 is 60*10=600 minutes after midnight
@@ -242,11 +242,7 @@ app.get('/upsertDB',
       const num = getNum(coursenum);
       course.num=num
       course.suffix = coursenum.slice(num.length)
-      const timeString = "";
-      for (time of times) {
-        timeString = [...time.days] + time.start + "-" + time.end;
-      }
-      course.strTimes = timeString;
+      course.strTimes = times2str(times)
       await Course.findOneAndUpdate({subject,coursenum,section,term},course,{upsert:true})
     }
     const num = await Course.find({}).count();
@@ -262,7 +258,6 @@ app.post('/courses/bySubject',
     const courses = await Course.find({subject:subject,independent_study:false}).sort({term:1,num:1,section:1})
     
     res.locals.courses = courses
-    res.locals.times2str = times2str
     //res.json(courses)
     res.render('courselist')
   }
@@ -289,7 +284,6 @@ app.get('/courses/show/:courseId',
     const {courseId} = req.params;
     const course = await Course.findOne({_id:courseId})
     res.locals.course = course
-    res.locals.times2str = times2str
     //res.json(course)
     res.render('course')
   }
@@ -316,7 +310,6 @@ app.post('/courses/byInst',
                .sort({term:1,num:1,section:1})
     //res.json(courses)
     res.locals.courses = courses
-    res.locals.times2str = times2str
     res.render('courselist')
   }
 )
