@@ -272,11 +272,10 @@ app.post('/courses/bySubject',
 app.post('/courses/byCourseName',
   // show list of courses bases on a given key word
   async (req,res,next) => {
-   
     const {name} = req.body;
     //db.Course.createIndexes({name: "text"});
-    const courses = await Course.find({name: name,independent_study:false}).sort({term:1,num:1,section:1})
-    console.log("response:" + courses);
+    const courses = await Course.find({'name': {$regex:`${name}.*`},independent_study:false}).sort({term:1,num:1,section:1})
+    console.log("response:" + name);
     res.locals.courses = courses
     res.locals.times2str = times2str
     //res.json(courses)
