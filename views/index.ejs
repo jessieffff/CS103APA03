@@ -21,10 +21,20 @@
             <input type="submit">
         </form>
         <br>
+
         <form method="post" action="/courses/byInst">
             Show Courses by Instructor Email: 
             <input type="text" name="email" 
                    placeholder="e.g. tjhickey">
+            <input type="submit">
+        </form>
+        <br>
+
+        <!-- Author: Jiefang Li -->
+        <form method="post" action="/courses/byCourseName">
+            Show Courses that Contains the Keyword in the Course Name: 
+                <input type="text" name="name" 
+                        placeholder="e.g. Data structure">
             <input type="submit">
         </form>
         <br>
