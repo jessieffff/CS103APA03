@@ -242,7 +242,7 @@ app.get('/upsertDB',
       const num = getNum(coursenum);
       course.num=num
       course.suffix = coursenum.slice(num.length)
-      course.strTimes = times2str(times)
+      course.strTimes = times2str(times) // process the times object into a list of strings beforehand, then save in DB
       await Course.findOneAndUpdate({subject,coursenum,section,term},course,{upsert:true})
     }
     const num = await Course.find({}).count();
