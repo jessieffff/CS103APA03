@@ -4,10 +4,10 @@ This is a starter project which has a simple authentication module
 and provides access to a mongoose database in the cloud.
 
 ## Team members
-Yiwen Luo
-Huijie Liu
-Qing Liu
-Jiefang Li
+- Yiwen Luo
+- Huijie Liu
+- Qing Liu
+- Jiefang Li
 
 ## Movie Link
 
