@@ -1,18 +1,27 @@
-<ul>
-    <% for (course of courses){%>
-        <li> 
-            <a href="/schedule/remove/<%= course._id %>">X</a>
-            <%= course['subject'] %>
-            <%= course.coursenum %>
-            <%= course.name %>
-            <%= course.term %>
-            
-        </li>
-    <% } %>
-</ul>
-
-<!--
-    <pre>
-        <%= JSON.stringify(courses,null,5) %>
-    </pre>
--->
+<% if (courses.length==0){%>
+      <hr>
+      <p> There are no courses in the schedule now. </p>
+  <% } else if (courses.length>0) { %>
+      <h2 class="mt-5">My courses </h2>
+      <div class="d-flex flex-wrap text-center overflow-scroll">
+          <% for (course of courses) {%>
+              <div class="p-3 m-3 border border-primary bg-light w-25">
+                  
+                  <br>
+                  <%= course['subject']%> <%= course['coursenum']%> <%= course['term']%>
+                  <br>
+                  <%= course['name']%>
+                  <br>
+                  <a href="/schedule/remove/<%= course._id %>">Delete</a>
+                  <hr>
+                  <a href="/courses/show/<%= course._id %>">Details</a>
+                  
+              </div>
+          <% }%>
+          </div>
+      <hr>
+      <h2>Here is the JSON object used to generate this page</h2>
+      <pre>
+      '<%= JSON.stringify(courses,null,5) %>'
+      </pre>
+  <% } %>
