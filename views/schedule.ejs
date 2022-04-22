@@ -6,16 +6,21 @@
       <div class="d-flex flex-wrap text-center overflow-scroll">
           <% for (course of courses) {%>
               <div class="p-3 m-3 border border-primary bg-light w-25">
-                  
-                  <br>
-                  <%= course['subject']%> <%= course['coursenum']%> <%= course['term']%>
-                  <br>
-                  <%= course['name']%>
-                  <br>
+                    <%= course.subject%> 
+                    <%= course.coursenum%> 
+                    <%= course.term%>
+                    <br>
+                    <strong><%= course.name%></strong>
+                    <br>
+                    <%=course.instructor[0] %>
+                    <%=course.instructor[1] %>
+                    (<%=course.instructor[2] %>)
+                    <br>
+                    Enrollment: <%=course.enrolled %>,
+                    Limit: <%=course.limit || 999 %>,
+                    Waitlist: <%= course.waiting %>
+                    <hr>
                   <a href="/schedule/remove/<%= course._id %>">Delete</a>
-                  <hr>
-                  <a href="/courses/show/<%= course._id %>">Details</a>
-                  
               </div>
           <% }%>
           </div>
