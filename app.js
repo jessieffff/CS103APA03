@@ -251,7 +251,7 @@ app.get('/upsertDB',
   }
 )
 
-
+//Author: Qing Liu 
 app.post('/courses/bySubject',
   // show list of courses in a given subject
   async (req,res,next) => {
@@ -279,6 +279,7 @@ app.post('/courses/byCourseName',
   }
 )
 
+//Author: Qing Liu 
 app.get('/courses/show/:courseId',
   // show all info about a course given its courseid
   async (req,res,next) => {
@@ -290,6 +291,7 @@ app.get('/courses/show/:courseId',
   }
 )
 
+//Author: Qing Liu 
 app.get('/courses/byInst/:email',
   // show a list of all courses taught by a given faculty
   async (req,res,next) => {
@@ -301,6 +303,7 @@ app.get('/courses/byInst/:email',
   } 
 )
 
+//Author: Qing Liu 
 app.post('/courses/byInst',
   // show courses taught by a faculty send from a form
   async (req,res,next) => {
