@@ -214,6 +214,7 @@ function min2HourMin(m){
   }
 }
 
+//Author: Yiwen Luo
 function time2str(time){
   // creates a Times string for a lecture or recitation, e.g. 
   //     "Recitation: Thu 5:00-6:30"
